@@ -1,0 +1,6 @@
+/* Styles for AccountLogin.jsx */
+.account-login {
+    display: block;
+    max-width: 480px;
+    margin: 0 auto;
+}

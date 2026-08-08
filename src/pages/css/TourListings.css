@@ -1,0 +1,24 @@
+/* Styles for TourListings.jsx */
+.tour-listings {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .tour-listings {
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tour-listings {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+}

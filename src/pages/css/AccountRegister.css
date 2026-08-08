@@ -1,0 +1,6 @@
+/* Styles for AccountRegister.jsx */
+.account-register {
+    display: block;
+    max-width: 520px;
+    margin: 0 auto;
+}

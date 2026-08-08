@@ -1,0 +1,19 @@
+/* Styles for TourDetails.jsx */
+.tour-details {
+  display: block;
+  padding: 24px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .tour-details {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tour-details {
+    padding: 16px;
+  }
+}
