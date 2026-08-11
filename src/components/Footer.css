@@ -1,0 +1,141 @@
+:root {
+    --brand-deep: #541818;
+    --brand-accent: #FFD700;
+    --muted: #E1D9D1;
+    --text-light: #ffffff;
+    --link-accent: #ff7a2d;
+}
+
+.site-footer {
+    margin-top: 50px;
+    background: var(--brand-deep);
+    color: var(--text-light);
+    padding: 56px 0 28px;
+}
+
+.footer-inner {
+    max-width: 1200px;
+}
+
+.footer-top {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.footer-about img {
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 6px;
+}
+
+.footer-about p {
+    max-width: 420px;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 14px;
+    line-height: 1.65;
+}
+
+.footer-links h5,
+.footer-contact h5 {
+    color: var(--text-light);
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.socials {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    color: var(--text-light);
+}
+
+.socials a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--link-accent);
+}
+
+.address {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 12px;
+}
+
+.address svg {
+    color: var(--link-accent);
+}
+
+.map-btn {
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 700;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 18px;
+    align-items: center;
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.bottom-links nav {
+    display: flex;
+    gap: 18px;
+    justify-content: flex-end;
+}
+
+.bottom-links nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bottom-links nav a:hover {
+    color: var(--link-accent);
+}
+
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+    }
+
+    .footer-about p {
+        max-width: 100%;
+    }
+
+    .bottom-links nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px
+    }
+}

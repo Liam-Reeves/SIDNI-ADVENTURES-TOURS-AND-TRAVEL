@@ -81,7 +81,7 @@
 .testimonial-top,
 .meta,
 .name {
-    font-size: 3rem;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
@@ -95,7 +95,7 @@
 .testimonial-top,
 .meta,
 .name p {
-    font-size: 2rem;
+    font-size: 1.25rem;
     line-height: 1.5;
     color: #541818;
 }
@@ -103,7 +103,7 @@
 .testimonial-top,
 .meta,
 .name .text {
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: #000000;
     padding-top: 10px;
