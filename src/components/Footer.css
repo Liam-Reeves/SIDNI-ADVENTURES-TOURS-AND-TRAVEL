@@ -21,9 +21,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-      
+
     justify-content: space-around;
 }
+
 .footer-about img {
     width: 82px;
     height: 82px;
@@ -58,6 +59,11 @@
 .footer-links ul li {
     margin: 10px 0;
     color: rgba(255, 255, 255, 0.92);
+}
+
+.footer-links ul li:hover {
+    color: var(--link-accent);
+    cursor: pointer;
 }
 
 .socials {
@@ -116,11 +122,25 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-       
+
     }
 
     .footer-about p {
         max-width: 100%;
+    }
+
+    .footer-links {
+        margin-top: 20px;
+        display: block;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-contact {
+        margin-top: 20px;
+        display: block;
+        align-items: center;
+        text-align: center;
     }
 
     .bottom-links nav {

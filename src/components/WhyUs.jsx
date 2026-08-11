@@ -2,11 +2,7 @@ import "./WhyUs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-
-
-
-
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 function WhyUs() {
   const reasons = [
@@ -42,7 +38,6 @@ function WhyUs() {
             <h3>{reason.title}</h3>
             <p>{reason.description}</p>
           </div>
-
         ))}
       </div>
     </div>
