@@ -2,6 +2,7 @@ import "./FeaturedCards.css";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+
 import beachImage from "../assets/beach.jpg";
 import cheetahImage from "../assets/cheetah-on-tree.jpg";
 import wildebeestImage from "../assets/5969.jpg";
@@ -15,7 +16,8 @@ function FeaturedCards() {
       image: beachImage,
       badge: "FEATURED",
       title: "Beach Escape",
-      description: "Discover warm sands and relaxing ocean views with our premium beach tours.",
+      description:
+        "Discover warm sands and relaxing ocean views with our premium beach tours.",
       meta: ["2 days", "8 people"],
       price: "$120",
     },
@@ -23,7 +25,8 @@ function FeaturedCards() {
       image: cheetahImage,
       badge: "POPULAR",
       title: "Wildlife Safari",
-      description: "Get up close with Africa’s most majestic predators in a guided safari.",
+      description:
+        "Get up close with Africa’s most majestic predators in a guided safari.",
       meta: ["1 day", "6 people"],
       price: "$150",
     },
@@ -31,7 +34,8 @@ function FeaturedCards() {
       image: wildebeestImage,
       badge: "NEW",
       title: "Migration Adventure",
-      description: "Follow the great migration across iconic landscapes and river crossings.",
+      description:
+        "Follow the great migration across iconic landscapes and river crossings.",
       meta: ["4 days", "10 people"],
       price: "$240",
     },
@@ -39,7 +43,8 @@ function FeaturedCards() {
       image: elephantImage,
       badge: "BEST SELLER",
       title: "Elephant Encounters",
-      description: "Experience gentle giants in their natural habitat with expert guides.",
+      description:
+        "Experience gentle giants in their natural habitat with expert guides.",
       meta: ["3 days", "6 people"],
       price: "$180",
     },
@@ -47,7 +52,8 @@ function FeaturedCards() {
       image: lionsImage,
       badge: "FEATURED",
       title: "Lion Pride Tour",
-      description: "Witness lion prides thriving on the savanna during an exclusive tour.",
+      description:
+        "Witness lion prides thriving on the savanna during an exclusive tour.",
       meta: ["2 days", "5 people"],
       price: "$200",
     },
@@ -55,7 +61,8 @@ function FeaturedCards() {
       image: savannahImage,
       badge: "SCENIC",
       title: "Scenic Safari Drive",
-      description: "Travel across golden grasslands and capture unforgettable scenery.",
+      description:
+        "Travel across golden grasslands and capture unforgettable scenery.",
       meta: ["1 day", "4 people"],
       price: "$140",
     },
@@ -63,7 +70,8 @@ function FeaturedCards() {
       image: beachImage,
       badge: "RELAX",
       title: "Sunset Retreat",
-      description: "Relax at dusk with stunning sunset views and seaside comforts.",
+      description:
+        "Relax at dusk with stunning sunset views and seaside comforts.",
       meta: ["2 days", "6 people"],
       price: "$110",
     },
@@ -71,7 +79,8 @@ function FeaturedCards() {
       image: cheetahImage,
       badge: "ADVENTURE",
       title: "Predator Watch",
-      description: "Track the fastest animals and learn about their hunting behavior.",
+      description:
+        "Track the fastest animals and learn about their hunting behavior.",
       meta: ["1 day", "4 people"],
       price: "$95",
     },
@@ -87,8 +96,8 @@ function FeaturedCards() {
           </div>
           <Card.Body className="card-body">
             <div className="card-meta">
-              <span>📅 {card.meta[0]}</span>
-              <span>👥 {card.meta[1]}</span>
+              <span>{card.meta[0]}</span>
+              <span>{card.meta[1]}</span>
             </div>
             <Card.Title className="title">{card.title}</Card.Title>
             <Card.Text className="description">{card.description}</Card.Text>
@@ -106,5 +115,3 @@ function FeaturedCards() {
 }
 
 export default FeaturedCards;
-
-
