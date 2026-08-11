@@ -9,7 +9,7 @@ import logo from "../assets/lodge_logo.png";
 function MainNavbar() {
   return (
     <Navbar
-      expand="lg"
+      expand="md"
       className="main-navbar bg-body-tertiary"
       collapseOnSelect
     >
@@ -17,7 +17,10 @@ function MainNavbar() {
         <Navbar.Brand as={Link} to="/" className="navbar-brand">
           <img src={logo} alt="Sidni Adventures Logo" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="nav-toggle"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto custom-nav">
             <Nav.Link as={Link} to="/">
@@ -38,15 +41,15 @@ function MainNavbar() {
             <Nav.Link as={Link} to="/contact">
               Contact
             </Nav.Link>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/login">
+                Login
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/register">
+                Register
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
-          <NavDropdown title="Account" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/login">
-              Login
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/register">
-              Register
-            </NavDropdown.Item>
-          </NavDropdown>
         </Navbar.Collapse>
       </Container>
     </Navbar>

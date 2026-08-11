@@ -2,8 +2,11 @@
 
     background: linear-gradient(90deg, #541818 0%, #541818 100%);
     box-shadow: 0 3px 18px rgba(0, 0, 0, 0.16);
-    min-height: 100px;
-    padding: 1.25rem 0;
+  
+    }
+.nav-toggle{
+    background-color: #d45e0a;
+   
 }
 
 .main-navbar .navbar-brand {
@@ -16,14 +19,14 @@
 }
 
 .main-navbar .navbar-brand img {
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
     object-fit: contain;
 
 }
 
 .custom-nav {
-    gap: 1.5rem;
+    gap: 1rem;
 
 }
 
@@ -64,6 +67,10 @@
 
     .main-navbar .navbar-brand {
         font-size: 18px;
+    }
+    .main-navbar .custom-nav{
+        font-size: 18px;
+        text-align: center;
     }
 
     .main-navbar .nav-link,

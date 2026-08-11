@@ -23,7 +23,7 @@ export default function Footer() {
               <img src={logo} alt="Sidni Adventures" />
             </div>
             <p>
-              Kenya Safari Adventures has all what adventure travellers need
+              Sidni Adventures has all what adventure travellers need
               under one roof — hotel reservations, short excursions, camping and
               lodge safaris, mountaineering, beach holidays and transfers.
             </p>
