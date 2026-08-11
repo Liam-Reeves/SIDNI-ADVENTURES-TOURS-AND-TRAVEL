@@ -62,7 +62,7 @@
 @media (max-width: 992px) {
 
     .hero-image {
-        height: 460px;
+        height: 500px;
     }
 
     .carousel-title {
@@ -78,7 +78,7 @@
 @media (max-width: 768px) {
 
     .hero-image {
-        height: 340px;
+        height: 200px;
     }
 
     .carousel-title {
@@ -94,7 +94,7 @@
 @media (max-width: 576px) {
 
     .hero-image {
-        height: 260px;
+        height: 605px;
     }
 
     .carousel-caption {

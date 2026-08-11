@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -9,7 +9,7 @@ import {
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+
 import logo from "../assets/lodge_logo.png";
 import "./Footer.css";
 
@@ -51,7 +51,7 @@ export default function Footer() {
             </ul>
           </Col>
 
-          <Col md={3} className="footer-contact">
+          <Col md={2} className="footer-contact">
             <h5>Follow us</h5>
             <div className="socials">
               <a aria-label="facebook" href="#">
@@ -67,19 +67,6 @@ export default function Footer() {
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
             </div>
-
-            <div className="address">
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-              <div>
-                Nairobi
-                <br />
-                Kenya
-              </div>
-            </div>
-
-            <Button variant="light" className="map-btn">
-              View Map →
-            </Button>
           </Col>
         </Row>
 
