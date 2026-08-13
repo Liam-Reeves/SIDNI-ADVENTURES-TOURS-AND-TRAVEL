@@ -1,10 +1,13 @@
 import "./TourListingCard.css";
 
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 import { FaClock, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 
 function TourListingCard({ tour }) {
+  const navigate = useNavigate();
+
   return (
     <article className="tour-card">
       <div className="tour-card__image-wrap">
@@ -40,7 +43,11 @@ function TourListingCard({ tour }) {
             <p className="tour-card__price">${tour.price}</p>
           </div>
 
-          <Button variant="outline-light" className="tour-card__button">
+          <Button
+            variant="outline-light"
+            className="tour-card__button"
+            onClick={() => navigate(`/tourdetails/${tour.id}`)}
+          >
             View tour <FiArrowRight />
           </Button>
         </div>

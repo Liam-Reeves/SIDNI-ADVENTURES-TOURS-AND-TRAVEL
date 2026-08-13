@@ -2,100 +2,18 @@ import "./css/TourListings.css";
 
 import { useMemo, useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { FaSearch, FaFilter, FaCompass } from "react-icons/fa";
 
 import TourListingCard from "../components/TourListingCard";
-import beachImage from "../assets/beach.jpg";
-import cheetahImage from "../assets/cheetah-on-tree.jpg";
-import wildebeestImage from "../assets/5969.jpg";
-import elephantImage from "../assets/elephant.jpg";
-import lionsImage from "../assets/lions-1.jpg";
-import savannahImage from "../assets/savannah-road.jpg";
+import { tours } from "../data/tour";
 
-const tours = [
-  {
-    id: 1,
-    title: "Golden Coast Escape",
-    location: "Diani, Kenya",
-    description:
-      "Relax on pristine beaches, snorkel in coral gardens, and enjoy a laid-back coastal retreat.",
-    duration: "3 days",
-    groupSize: "8 people",
-    price: 180,
-    rating: "4.9",
-    badge: "Featured",
-    image: beachImage,
-  },
-  {
-    id: 2,
-    title: "Big Five Safari",
-    location: "Masai Mara",
-    description:
-      "Follow the wildebeest migration and spot lions, rhinos, elephants, and buffalo in the wild.",
-    duration: "5 days",
-    groupSize: "6 people",
-    price: 320,
-    rating: "4.8",
-    badge: "Popular",
-    image: cheetahImage,
-  },
-  {
-    id: 3,
-    title: "Highland Adventure",
-    location: "Aberdare Range",
-    description:
-      "Hike misty trails, discover hidden waterfalls, and camp under star-filled skies.",
-    duration: "4 days",
-    groupSize: "10 people",
-    price: 240,
-    rating: "4.7",
-    badge: "New",
-    image: wildebeestImage,
-  },
-  {
-    id: 4,
-    title: "Elephant Trails",
-    location: "Amboseli",
-    description:
-      "Enjoy sunrise game drives and memorable encounters with elephants against Mount Kilimanjaro.",
-    duration: "2 days",
-    groupSize: "5 people",
-    price: 150,
-    rating: "4.9",
-    badge: "Best Seller",
-    image: elephantImage,
-  },
-  {
-    id: 5,
-    title: "Lion Pride Expedition",
-    location: "Serengeti",
-    description:
-      "Experience dramatic plains, close wildlife sightings, and expert-led photography stops.",
-    duration: "6 days",
-    groupSize: "7 people",
-    price: 410,
-    rating: "5.0",
-    badge: "Premium",
-    image: lionsImage,
-  },
-  {
-    id: 6,
-    title: "Savannah Sunrise Drive",
-    location: "Laikipia",
-    description:
-      "Watch the sunrise spill across grasslands and connect with Kenya’s most iconic landscapes.",
-    duration: "1 day",
-    groupSize: "4 people",
-    price: 95,
-    rating: "4.6",
-    badge: "Scenic",
-    image: savannahImage,
-  },
-];
+
 
 export default function TourListings() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const navigate = useNavigate();
 
   const categories = [
     "All",
@@ -118,6 +36,11 @@ export default function TourListings() {
       return matchesSearch && matchesCategory;
     });
   }, [searchTerm, selectedCategory]);
+
+  const handlePlanTrip = () => {
+    const destinationTour = filteredTours[0] ?? tours[0];
+    navigate(`/tourdetails/${destinationTour.id}`);
+  };
 
   return (
     <main className="tour-listings-page">
@@ -159,7 +82,12 @@ export default function TourListings() {
           </Form.Select>
         </div>
 
-        <Button className="tour-listings-controls__button">Plan my trip</Button>
+        <Button
+          className="tour-listings-controls__button"
+          onClick={handlePlanTrip}
+        >
+          Plan my trip
+        </Button>
       </section>
 
       <section className="tour-listings-grid" aria-label="Available tours">
