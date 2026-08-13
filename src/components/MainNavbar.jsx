@@ -26,9 +26,6 @@ function MainNavbar() {
             <Nav.Link as={Link} to="/">
               Home.
             </Nav.Link>
-            <Nav.Link as={Link} to="/aboutus">
-              About Us.
-            </Nav.Link>
             <Nav.Link as={Link} to="/tourlistings">
               Destinations.
             </Nav.Link>

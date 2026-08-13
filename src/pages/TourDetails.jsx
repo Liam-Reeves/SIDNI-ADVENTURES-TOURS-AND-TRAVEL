@@ -1,9 +1,9 @@
 import "./css/TourDetails.css";
-
+import Footer from "../components/Footer";
+import MainNavbar from "../components/MainNavbar";
 import Button from "react-bootstrap/Button";
 import { Link, useParams } from "react-router-dom";
 import {
-  FaArrowLeft,
   FaCalendarAlt,
   FaClock,
   FaMapMarkerAlt,
@@ -11,7 +11,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 
-import { tours } from "./TourListings";
+import { tours } from "../data/tour";
 
 export default function TourDetails() {
   const { tourId } = useParams();
@@ -32,17 +32,7 @@ export default function TourDetails() {
 
   return (
     <main className="tour-details">
-      <div className="tour-details__back-row">
-        <Button
-          as={Link}
-          to="/tourlistings"
-          variant="outline-secondary"
-          className="tour-details__back-button"
-        >
-          <FaArrowLeft /> Back to tours
-        </Button>
-      </div>
-
+      <MainNavbar />
       <section className="tour-details__hero">
         <div className="tour-details__image-wrap">
           <img
@@ -118,6 +108,7 @@ export default function TourDetails() {
           ))}
         </ol>
       </section>
+      <Footer />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import "./css/TourListings.css";
-
+import Footer from "../components/Footer";
+import MainNavbar from "../components/MainNavbar";
 import { useMemo, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -44,6 +45,7 @@ export default function TourListings() {
 
   return (
     <main className="tour-listings-page">
+     <MainNavbar />
       <section className="tour-listings-hero">
         <div className="tour-listings-hero__content">
           <p className="tour-listings-hero__eyebrow">
@@ -104,6 +106,8 @@ export default function TourListings() {
           </div>
         )}
       </section>
+    <Footer />
     </main>
   );
 }
+

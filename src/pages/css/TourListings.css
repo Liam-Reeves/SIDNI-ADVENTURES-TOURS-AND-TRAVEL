@@ -1,7 +1,7 @@
 .tour-listings-page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 3rem;
+ 
+
+ 
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -11,6 +11,8 @@
   background: linear-gradient(135deg, rgba(84, 24, 24, 0.95), rgba(19, 82, 67, 0.92));
   border-radius: 28px;
   padding: 2.4rem;
+  margin-left: 50px;
+  margin-right: 50px;
   color: #fff;
   box-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
 }
