@@ -2,6 +2,7 @@ import "./FeaturedCards.css";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useNavigate } from "react-router-dom";
 
 import beachImage from "../assets/beach.jpg";
 import cheetahImage from "../assets/cheetah-on-tree.jpg";
@@ -11,8 +12,11 @@ import lionsImage from "../assets/lions-1.jpg";
 import savannahImage from "../assets/savannah-road.jpg";
 
 function FeaturedCards() {
+  const navigate = useNavigate();
+
   const cards = [
     {
+      id: 1,
       image: beachImage,
       badge: "FEATURED",
       title: "Beach Escape",
@@ -22,6 +26,7 @@ function FeaturedCards() {
       price: "$120",
     },
     {
+      id: 2,
       image: cheetahImage,
       badge: "POPULAR",
       title: "Wildlife Safari",
@@ -31,6 +36,7 @@ function FeaturedCards() {
       price: "$150",
     },
     {
+      id: 3,
       image: wildebeestImage,
       badge: "NEW",
       title: "Migration Adventure",
@@ -40,6 +46,7 @@ function FeaturedCards() {
       price: "$240",
     },
     {
+      id: 4,
       image: elephantImage,
       badge: "BEST SELLER",
       title: "Elephant Encounters",
@@ -49,6 +56,7 @@ function FeaturedCards() {
       price: "$180",
     },
     {
+      id: 5,
       image: lionsImage,
       badge: "FEATURED",
       title: "Lion Pride Tour",
@@ -58,6 +66,7 @@ function FeaturedCards() {
       price: "$200",
     },
     {
+      id: 6,
       image: savannahImage,
       badge: "SCENIC",
       title: "Scenic Safari Drive",
@@ -67,6 +76,7 @@ function FeaturedCards() {
       price: "$140",
     },
     {
+      id: 1,
       image: beachImage,
       badge: "RELAX",
       title: "Sunset Retreat",
@@ -76,6 +86,7 @@ function FeaturedCards() {
       price: "$110",
     },
     {
+      id: 2,
       image: cheetahImage,
       badge: "ADVENTURE",
       title: "Predator Watch",
@@ -89,7 +100,7 @@ function FeaturedCards() {
   return (
     <div className="featured-cards">
       {cards.map((card) => (
-        <Card className="featured-card" key={card.title}>
+        <Card className="featured-card" key={`${card.title}-${card.id}`}>
           <div className="card-image-wrapper">
             <Card.Img variant="top" src={card.image} />
             <span className="card-badge">{card.badge}</span>
@@ -103,7 +114,11 @@ function FeaturedCards() {
             <Card.Text className="description">{card.description}</Card.Text>
             <div className="card-footer">
               <div className="price">From {card.price}</div>
-              <Button variant="primary" className="button">
+              <Button
+                variant="primary"
+                className="button"
+                onClick={() => navigate(`/tourdetails/${card.id}`)}
+              >
                 Explore →
               </Button>
             </div>
