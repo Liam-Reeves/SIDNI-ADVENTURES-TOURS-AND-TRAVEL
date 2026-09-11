@@ -72,7 +72,7 @@ export default function Footer() {
 
         <Row className="footer-bottom">
           <Col md={6} className="copyright">
-            Copyright © {new Date().getFullYear()} KENYA SAFARI ADVENTURES. All
+            Copyright © {new Date().getFullYear()} Liam Reeves Softwares. All
             Rights Reserved.
           </Col>
           <Col md={6} className="bottom-links">
