@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'sidniconfig.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 
-DATABASES = {
+DATABASES = { #I am using PostgreSQL for this project, but you can use any database of your choice. Just make sure to update the settings accordingly(Liam Reeves)
  'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('DB_NAME'),
@@ -169,6 +169,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Email

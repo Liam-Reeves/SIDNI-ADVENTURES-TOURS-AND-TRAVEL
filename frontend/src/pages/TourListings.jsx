@@ -1,17 +1,17 @@
 import "./css/TourListings.css";
 import Footer from "../components/Footer";
 import MainNavbar from "../components/MainNavbar";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaSearch, FaFilter, FaCompass } from "react-icons/fa";
 
 import TourListingCard from "../components/TourListingCard";
-import { tours } from "../data/tour";
-
-
+import { fetchTours } from "../api";
 
 export default function TourListings() {
+  const [tours, setTours] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
@@ -26,6 +26,21 @@ export default function TourListings() {
     "Scenic",
   ];
 
+  useEffect(() => {
+    const loadTours = async () => {
+      try {
+        const data = await fetchTours();
+        setTours(data);
+      } catch (error) {
+        console.error("Could not load tours:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTours();
+  }, []);
+
   const filteredTours = useMemo(() => {
     return tours.filter((tour) => {
       const matchesSearch =
@@ -36,16 +51,18 @@ export default function TourListings() {
 
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, tours]);
 
   const handlePlanTrip = () => {
     const destinationTour = filteredTours[0] ?? tours[0];
-    navigate(`/tourdetails/${destinationTour.id}`);
+    if (destinationTour) {
+      navigate(`/tourdetails/${destinationTour.id}`);
+    }
   };
 
   return (
     <main className="tour-listings-page">
-     <MainNavbar />
+      <MainNavbar />
       <section className="tour-listings-hero">
         <div className="tour-listings-hero__content">
           <p className="tour-listings-hero__eyebrow">
@@ -93,7 +110,11 @@ export default function TourListings() {
       </section>
 
       <section className="tour-listings-grid" aria-label="Available tours">
-        {filteredTours.length > 0 ? (
+        {isLoading ? (
+          <div className="tour-listings-empty">
+            <h2>Loading tours...</h2>
+          </div>
+        ) : filteredTours.length > 0 ? (
           filteredTours.map((tour) => (
             <TourListingCard key={tour.id} tour={tour} />
           ))
@@ -106,8 +127,7 @@ export default function TourListings() {
           </div>
         )}
       </section>
-    <Footer />
+      <Footer />
     </main>
   );
 }
-

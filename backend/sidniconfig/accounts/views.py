@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from rest_framework.views import APIView, generics, permissions
+from rest_framework import generics, permissions
 
 # Create your views here.
 

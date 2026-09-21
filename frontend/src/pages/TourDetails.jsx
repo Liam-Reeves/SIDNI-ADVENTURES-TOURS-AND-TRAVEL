@@ -2,7 +2,7 @@ import "./css/TourDetails.css";
 import Footer from "../components/Footer";
 import MainNavbar from "../components/MainNavbar";
 import Button from "react-bootstrap/Button";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   FaCalendarAlt,
   FaClock,
@@ -10,13 +10,45 @@ import {
   FaStar,
   FaUsers,
 } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-import { tours } from "../data/tour";
+import { fetchTourById } from "../api";
 
 export default function TourDetails() {
   const { tourId } = useParams();
-  const selectedTour =
-    tours.find((tour) => String(tour.id) === String(tourId)) ?? tours[0];
+  const navigate = useNavigate();
+  const [selectedTour, setSelectedTour] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadTour = async () => {
+      try {
+        const tour = await fetchTourById(tourId);
+        setSelectedTour(tour);
+      } catch (error) {
+        console.error("Could not load tour:", error);
+        setSelectedTour(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTour();
+  }, [tourId]);
+
+  const handleBookNow = () => {
+    if (!selectedTour) return;
+    localStorage.setItem("sidni_selected_tour", JSON.stringify(selectedTour));
+    navigate("/booking");
+  };
+
+  if (loading) {
+    return (
+      <main className="tour-details tour-details--empty">
+        <h1>Loading tour...</h1>
+      </main>
+    );
+  }
 
   if (!selectedTour) {
     return (
@@ -62,13 +94,17 @@ export default function TourDetails() {
           </div>
 
           <p className="tour-details__price">
-            From <strong>${selectedTour.price}</strong> / person
+            From <strong>KES{selectedTour.price}</strong> / person
           </p>
 
           <p className="tour-details__overview">{selectedTour.overview}</p>
 
           <div className="tour-details__actions">
-            <Button variant="primary" className="tour-details__primary-action">
+            <Button
+              variant="primary"
+              className="tour-details__primary-action"
+              onClick={handleBookNow}
+            >
               Book this adventure
             </Button>
             <Button variant="outline-primary" as={Link} to="/tourlistings">

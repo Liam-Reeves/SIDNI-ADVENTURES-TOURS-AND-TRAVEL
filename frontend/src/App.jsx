@@ -8,6 +8,9 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import AccountLogin from "./pages/AccountLogin";
 import AccountRegister from "./pages/AccountRegister";
+import Booking from "./pages/Booking";
+import Payment from "./pages/Payment";
+import UserAccount from "./pages/UserAccount";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<AccountLogin />} />
         <Route path="/register" element={<AccountRegister />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/useraccount" element={<UserAccount />} />
       </Routes>
     </BrowserRouter>
   );
