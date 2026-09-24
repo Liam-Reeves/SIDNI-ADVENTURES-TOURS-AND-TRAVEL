@@ -1,15 +1,24 @@
 from django.urls import path
 
-from .views import (
-    CreateMpesaPaymentView,
-    CreatePaymentIntentView,
-    MpesaCallbackView,
-    StripeWebhookView,
-)
+from . import views
+
 
 urlpatterns = [
-    path('create-intent/', CreatePaymentIntentView.as_view(), name='create-payment-intent'),
-    path('create-mpesa/', CreateMpesaPaymentView.as_view(), name='create-mpesa-payment'),
-    path('mpesa-callback/', MpesaCallbackView.as_view(), name='mpesa-callback'),
-    path('webhook/', StripeWebhookView.as_view(), name='stripe-webhook'),
+    path(
+        "start/",
+        views.start_payment,
+        name="start_payment",
+    ),
+
+    path(
+        "<int:payment_id>/status/",
+        views.get_payment_status,
+        name="payment_status",
+    ),
+
+    path(
+        "callback/",
+        views.mpesa_callback,
+        name="mpesa_callback",
+    ),
 ]

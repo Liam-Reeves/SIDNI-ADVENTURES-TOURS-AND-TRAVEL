@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import "./MainNavbar.css";
 import logo from "../assets/lodge_logo.png";
@@ -35,14 +34,6 @@ function MainNavbar() {
             <Nav.Link as={Link} to="/contact">
               Contact
             </Nav.Link>
-            <NavDropdown title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/login">
-                Login
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/register">
-                Register
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

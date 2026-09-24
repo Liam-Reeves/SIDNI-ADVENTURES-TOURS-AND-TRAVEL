@@ -1,52 +1,78 @@
 import base64
-import requests
-
 from datetime import datetime
+from decimal import Decimal, ROUND_HALF_UP
+from zoneinfo import ZoneInfo
 
+import requests
 from django.conf import settings
-def get_mpesa_access_token():
-    url = (
-        "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-        if settings.MPESA_ENV == 'sandbox' else
-        "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    )
+
+
+def get_base_url():
+    if settings.MPESA_ENVIRONMENT == "production":
+        return "https://api.safaricom.co.ke"
+    if settings.MPESA_ENVIRONMENT == "sandbox":
+        return "https://sandbox.safaricom.co.ke"
+    raise ValueError("MPESA_ENVIRONMENT must be sandbox or production")
+
+
+def normalize_phone_number(phone_number):
+    phone = "".join(character for character in str(phone_number) if character.isdigit())
+    if phone.startswith("0"):
+        phone = f"254{phone[1:]}"
+    elif phone.startswith(("7", "1")):
+        phone = f"254{phone}"
+    if len(phone) != 12 or not phone.startswith("254"):
+        raise ValueError("Invalid Kenyan M-Pesa phone number")
+    return phone
+
+
+def get_access_token():
     response = requests.get(
-        url,
-        auth=(settings.MPESA_CONSUMER_KEY, settings.MPESA_CONSUMER_SECRET)
+        f"{get_base_url()}/oauth/v1/generate",
+        params={"grant_type": "client_credentials"},
+        auth=(settings.MPESA_CONSUMER_KEY, settings.MPESA_CONSUMER_SECRET),
+        timeout=30,
     )
     response.raise_for_status()
-    return response.json()['access_token']
+    token = response.json().get("access_token")
+    if not token:
+        raise ValueError("Daraja did not return an access token")
+    return token
 
-def generate_password_and_timestamp():
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-    
+
+def generate_password(timestamp):
     raw = f"{settings.MPESA_SHORTCODE}{settings.MPESA_PASSKEY}{timestamp}"
-    
-    password = base64.b64encode(raw.encode()).decode()
-    return password, timestamp
-def initiate_stk_push(phone_number, amount, account_reference, description):
-    """phone_number format required by Daraja: 2547XXXXXXXX (no + or leading 0)"""
-    access_token = get_mpesa_access_token()
-    password, timestamp = generate_password_and_timestamp()
-    url = (
-        "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-        if settings.MPESA_ENV == 'sandbox' else
-        "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-    )
+    return base64.b64encode(raw.encode()).decode()
+
+
+def send_stk_push(phone, amount):
+    phone = normalize_phone_number(phone)
+    amount = int(Decimal(str(amount)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+    if amount < 1:
+        raise ValueError("Amount must be greater than zero")
+
+    timestamp = datetime.now(ZoneInfo("Africa/Nairobi")).strftime("%Y%m%d%H%M%S")
     payload = {
         "BusinessShortCode": settings.MPESA_SHORTCODE,
-        "Password": password,
+        "Password": generate_password(timestamp),
         "Timestamp": timestamp,
         "TransactionType": "CustomerPayBillOnline",
-        "Amount": int(amount),
-        "PartyA": phone_number,
+        "Amount": amount,
+        "PartyA": phone,
         "PartyB": settings.MPESA_SHORTCODE,
-        "PhoneNumber": phone_number,
+        "PhoneNumber": phone,
         "CallBackURL": settings.MPESA_CALLBACK_URL,
-        "AccountReference": account_reference,
-        "TransactionDesc": description,
+        "AccountReference": "MY-WEBSITE",
+        "TransactionDesc": "Website payment",
     }
-    headers = {"Authorization": f"Bearer {access_token}"}
-    response = requests.post(url, json=payload, headers=headers)
+    response = requests.post(
+        f"{get_base_url()}/mpesa/stkpush/v1/processrequest",
+        json=payload,
+        headers={
+            "Authorization": f"Bearer {get_access_token()}",
+            "Content-Type": "application/json",
+        },
+        timeout=30,
+    )
     response.raise_for_status()
     return response.json()

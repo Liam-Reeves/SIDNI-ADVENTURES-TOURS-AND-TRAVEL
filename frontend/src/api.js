@@ -92,21 +92,6 @@ export const fetchTourAvailabilities = async (tourId) => {
   return response.data;
 };
 
-export const loginUser = async ({ email, password }) => {
-  const response = await api.post("/api/token/", { username: email, password });
-  const { access, refresh } = response.data;
-
-  localStorage.setItem("sidni_access_token", access);
-  localStorage.setItem("sidni_refresh_token", refresh);
-
-  return response.data;
-};
-
-export const registerUser = async (payload) => {
-  const response = await api.post("/api/accounts/register/", payload);
-  return response.data;
-};
-
 export const fetchMyBookings = async () => {
   const response = await api.get("/api/bookings/my/");
   return response.data;
@@ -121,19 +106,17 @@ export const createBooking = async ({ availability_id, number_of_people }) => {
   return response.data;
 };
 
-export const createPaymentIntent = async (bookingId) => {
-  const response = await api.post("/api/payments/create-intent/", {
-    booking_id: bookingId,
-  });
-  return response.data;
-};
-
 export const createMpesaPayment = async ({ booking_id, phone_number }) => {
   const response = await api.post("/api/payments/create-mpesa/", {
     booking_id,
     phone_number,
   });
 
+  return response.data;
+};
+
+export const fetchPaymentStatus = async (bookingId) => {
+  const response = await api.get(`/api/payments/status/${bookingId}/`);
   return response.data;
 };
 

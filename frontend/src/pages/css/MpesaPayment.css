@@ -1,0 +1,427 @@
+.mpesa-page {
+    min-height: calc(100vh - 100px);
+    padding: 4.5rem 1.25rem 5rem;
+    background:
+        radial-gradient(circle at 10% 15%, rgba(212, 175, 55, 0.12), transparent 28%),
+        linear-gradient(135deg, #fbf8f3 0%, #f5eee5 100%);
+}
+
+.mpesa-shell {
+    max-width: 1060px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #eadbca;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(84, 24, 24, 0.12);
+}
+
+.mpesa-intro {
+    padding: 2.5rem 3rem 2.2rem;
+    color: #fff;
+    background: linear-gradient(120deg, #541818 0%, #6e2924 64%, #17634f 150%);
+}
+
+.mpesa-kicker {
+    display: inline-block;
+    margin-bottom: 0.7rem;
+    color: #d4af37;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.mpesa-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.mpesa-heading-row h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+}
+
+.mpesa-heading-row p {
+    margin: 0.65rem 0 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 1.05rem;
+}
+
+.mpesa-mark {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 82px;
+    height: 82px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.12);
+    transform: rotate(4deg);
+}
+
+.mpesa-mark span {
+    margin-bottom: -0.9rem;
+    color: #fff;
+    font-size: 2.1rem;
+    font-weight: 900;
+}
+
+.mpesa-mark small {
+    color: #d4af37;
+    font-size: 0.63rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+}
+
+.mpesa-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.75fr);
+    gap: 1.5rem;
+    padding: 2rem 3rem 2.7rem;
+}
+
+.mpesa-form-card,
+.mpesa-status-card {
+    border: 1px solid #efe4d8;
+    border-radius: 20px;
+    padding: 1.6rem;
+}
+
+.mpesa-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: #fffdfa;
+}
+
+.mpesa-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.4rem;
+}
+
+.mpesa-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    color: #fff;
+    background: #17634f;
+    font-size: 1.5rem;
+}
+
+.mpesa-card-heading h2 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.3rem;
+}
+
+.mpesa-card-heading p {
+    margin: 0.2rem 0 0;
+    color: #8b8178;
+    font-size: 0.88rem;
+}
+
+.mpesa-form-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #374151;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.mpesa-phone-field,
+.mpesa-amount-field {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #e4dad0;
+    border-radius: 13px;
+    background: #fbf9f6;
+}
+
+.mpesa-phone-field b,
+.mpesa-amount-field b {
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    padding: 0 0.9rem;
+    border-right: 1px solid #e4dad0;
+    color: #17634f;
+    font-size: 0.85rem;
+}
+
+.mpesa-form-card input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: 0.9rem 1rem;
+    color: #1f2937;
+    background: transparent;
+    font: inherit;
+}
+
+.mpesa-phone-field:focus-within,
+.mpesa-amount-field:focus-within {
+    border-color: #17634f;
+    box-shadow: 0 0 0 3px rgba(23, 99, 79, 0.12);
+}
+
+.mpesa-security-note {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    padding: 0.85rem;
+    border-radius: 12px;
+    color: #17634f;
+    background: rgba(23, 99, 79, 0.08);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.mpesa-lock {
+    font-weight: 900;
+}
+
+.mpesa-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 0;
+    border-radius: 999px;
+    padding: 1rem 1.15rem 1rem 1.35rem;
+    color: #fff;
+    background: #541818;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mpesa-submit:hover:not(:disabled) {
+    background: #17634f;
+    transform: translateY(-2px);
+}
+
+.mpesa-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.mpesa-submit-arrow {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 1.25rem;
+}
+
+.mpesa-status-card {
+    background: #fbf9f6;
+}
+
+.mpesa-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.4rem 0 1.6rem;
+    border-radius: 999px;
+    padding: 0.55rem 0.8rem;
+    color: #6b625b;
+    background: #eee8df;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.mpesa-status-badge--pending {
+    color: #8c5b00;
+    background: #fff1c9;
+}
+
+.mpesa-status-badge--success {
+    color: #17634f;
+    background: #dff3e9;
+}
+
+.mpesa-status-badge--failed {
+    color: #9b2c2c;
+    background: #fde2e2;
+}
+
+.mpesa-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.mpesa-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mpesa-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #aaa097;
+}
+
+.mpesa-step>span {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 27px;
+    height: 27px;
+    border: 1px solid #dfd4c8;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.mpesa-step.is-active,
+.mpesa-step.is-success {
+    color: #17634f;
+}
+
+.mpesa-step.is-active>span,
+.mpesa-step.is-success>span {
+    border-color: #17634f;
+    background: #17634f;
+    color: #fff;
+}
+
+.mpesa-step strong,
+.mpesa-step small {
+    display: block;
+}
+
+.mpesa-step strong {
+    color: inherit;
+    font-size: 0.9rem;
+}
+
+.mpesa-step small {
+    margin-top: 0.2rem;
+    color: #9a9087;
+    font-size: 0.78rem;
+}
+
+.mpesa-status-message {
+    margin: 1.4rem 0 0;
+    border-top: 1px solid #e9ded2;
+    padding-top: 1rem;
+    color: #5d554e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.mpesa-receipt {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    padding: 0.85rem;
+    color: #17634f;
+    background: #dff3e9;
+    font-size: 0.82rem;
+}
+
+.mpesa-reference {
+    display: block;
+    margin-top: 1rem;
+    color: #a1968d;
+}
+
+.mpesa-amount-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid #eadbca;
+    border-radius: 14px;
+    padding: 1rem;
+    background: #f8efe4;
+}
+
+.mpesa-amount-display span {
+    color: #8b8178;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.mpesa-amount-display strong {
+    color: #541818;
+    font-size: 1.65rem;
+}
+
+.mpesa-amount-display small {
+    overflow: hidden;
+    color: #6f665f;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .mpesa-page {
+        padding: 1.5rem 0.85rem 3rem;
+    }
+
+    .mpesa-intro {
+        padding: 2rem 1.35rem;
+    }
+
+    .mpesa-heading-row h1 {
+        font-size: 2.25rem;
+    }
+
+    .mpesa-mark {
+        width: 64px;
+        height: 64px;
+        border-radius: 17px;
+    }
+
+    .mpesa-content {
+        grid-template-columns: 1fr;
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .mpesa-heading-row {
+        align-items: flex-start;
+    }
+
+    .mpesa-mark {
+        width: 54px;
+        height: 54px;
+    }
+
+    .mpesa-mark span {
+        font-size: 1.5rem;
+    }
+
+    .mpesa-heading-row p {
+        font-size: 0.9rem;
+    }
+
+    .mpesa-form-card,
+    .mpesa-status-card {
+        padding: 1.1rem;
+    }
+}

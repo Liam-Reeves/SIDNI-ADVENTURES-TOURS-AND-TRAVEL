@@ -1,4 +1,5 @@
 import "./css/UserAccount.css";
+import { useMemo } from "react";
 import MainNavbar from "../components/MainNavbar";
 import Footer from "../components/Footer";
 import Button from "react-bootstrap/Button";
@@ -12,14 +13,6 @@ import {
   FaPhoneAlt,
   FaUser,
 } from "react-icons/fa";
-
-const profile = {
-  name: "Amina Njeri",
-  email: "amina.njeri@sidniadventures.com",
-  phone: "+254 712 345 678",
-  location: "Nairobi, Kenya",
-  memberSince: "March 2024",
-};
 
 const paymentInfo = {
   method: "Visa •••• 2458",
@@ -52,6 +45,31 @@ const previousBookings = [
 ];
 
 export default function UserAccount() {
+  const profile = useMemo(() => {
+    try {
+      const savedUser = JSON.parse(localStorage.getItem("sidni_user") || "{}");
+      const name = [savedUser.first_name, savedUser.last_name]
+        .filter(Boolean)
+        .join(" ");
+
+      return {
+        name: name || savedUser.email || "Traveler",
+        email: savedUser.email || "",
+        phone: savedUser.phone_number || "Not provided",
+        location: savedUser.location || "Not provided",
+        memberSince: "Today",
+      };
+    } catch {
+      return {
+        name: "Traveler",
+        email: "",
+        phone: "Not provided",
+        location: "Not provided",
+        memberSince: "Today",
+      };
+    }
+  }, []);
+
   const totalSpent = previousBookings.reduce(
     (sum, booking) => sum + booking.amount,
     0,
@@ -104,7 +122,7 @@ export default function UserAccount() {
           <div className="account-panel account-panel--summary">
             <div className="summary-stat">
               <span>Total spent</span>
-              <strong>${totalSpent}</strong>
+              <strong>KES {totalSpent}</strong>
             </div>
             <div className="summary-stat">
               <span>Trips booked</span>
@@ -163,7 +181,7 @@ export default function UserAccount() {
                   </div>
                   <div className="booking-history__meta">
                     <span>{booking.travelers} travelers</span>
-                    <strong>${booking.amount}</strong>
+                    <strong>KES {booking.amount}</strong>
                   </div>
                   <span
                     className={`status-pill status-pill--${booking.status.toLowerCase()}`}

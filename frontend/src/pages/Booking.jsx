@@ -63,7 +63,7 @@ export default function Booking() {
         if (status === 401) {
           localStorage.removeItem("sidni_access_token");
           localStorage.removeItem("sidni_refresh_token");
-          navigate("/login");
+          navigate("/tourlistings");
           return;
         }
 
@@ -98,7 +98,7 @@ export default function Booking() {
           </div>
           <div className="booking-page__summary">
             <span>Total</span>
-            <strong>${totalAmount}</strong>
+            <strong>KES {totalAmount}</strong>
           </div>
         </section>
 
@@ -157,7 +157,7 @@ export default function Booking() {
                     <div className="booking-card__bottom-row">
                       <div>
                         <p className="booking-card__label">Trip value</p>
-                        <strong>${Number(booking.total_amount || 0)}</strong>
+                        <strong>KES {Number(booking.total_amount || 0)}</strong>
                       </div>
                       <Button
                         as={Link}

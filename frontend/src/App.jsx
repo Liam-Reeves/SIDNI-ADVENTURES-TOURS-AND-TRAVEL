@@ -6,11 +6,14 @@ import TourListings from "./pages/TourListings";
 import TourDetails from "./pages/TourDetails";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
-import AccountLogin from "./pages/AccountLogin";
-import AccountRegister from "./pages/AccountRegister";
 import Booking from "./pages/Booking";
-import Payment from "./pages/Payment";
+
 import UserAccount from "./pages/UserAccount";
+
+import Payment from "./pages/Payment";
+import MpesaPayment from "./pages/MpesaPayment";
+import CardPayment from "./pages/CardPayment";
+import PaypalPayment from "./pages/PaypalPayment";
 
 function App() {
   return (
@@ -25,11 +28,12 @@ function App() {
         <Route path="/tourdetails/:tourId" element={<TourDetails />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<AccountLogin />} />
-        <Route path="/register" element={<AccountRegister />} />
         <Route path="/booking" element={<Booking />} />
-        <Route path="/payment" element={<Payment />} />
         <Route path="/useraccount" element={<UserAccount />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/mpesa" element={<MpesaPayment />} />
+        <Route path="/payment/card" element={<CardPayment />} />
+        <Route path="/payment/paypal" element={<PaypalPayment />} />
       </Routes>
     </BrowserRouter>
   );

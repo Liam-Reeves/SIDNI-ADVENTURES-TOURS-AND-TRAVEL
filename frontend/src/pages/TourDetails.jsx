@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-import { fetchTourById } from "../api";
+import { createBooking, fetchTourAvailabilities, fetchTourById } from "../api";
 
 export default function TourDetails() {
   const { tourId } = useParams();
@@ -36,10 +36,42 @@ export default function TourDetails() {
     loadTour();
   }, [tourId]);
 
-  const handleBookNow = () => {
+  const handleBookNow = async () => {
     if (!selectedTour) return;
+
+    const token = localStorage.getItem("sidni_access_token");
     localStorage.setItem("sidni_selected_tour", JSON.stringify(selectedTour));
-    navigate("/booking");
+
+    if (!token) {
+      navigate("/payment");
+      return;
+    }
+
+    try {
+      const availabilities = await fetchTourAvailabilities(selectedTour.id);
+      const firstAvailable = availabilities.find(
+        (slot) => Number(slot.slots_available) > 0,
+      );
+
+      if (!firstAvailable) {
+        navigate("/payment");
+        return;
+      }
+
+      const createdBooking = await createBooking({
+        availability_id: firstAvailable.id,
+        number_of_people: 1,
+      });
+
+      localStorage.setItem(
+        "sidni_selected_booking",
+        JSON.stringify(createdBooking),
+      );
+      navigate("/payment");
+    } catch (error) {
+      console.error("Could not create booking:", error);
+      navigate("/payment");
+    }
   };
 
   if (loading) {

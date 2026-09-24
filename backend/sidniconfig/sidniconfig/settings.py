@@ -11,7 +11,15 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 import environ
 import os
-
+from datetime import datetime
+from dotenv import load_dotenv
+load_dotenv(".env")  # Load environment variables from .env file
+GOOGLE_OAUTH_CLIENT_ID = os.getenv("GOOGLE_OAUTH_CLIENT_ID") or os.getenv("VITE_GOOGLE_OAUTH_CLIENT_ID")
+GOOGLE_OAUTH_CLIENT_SECRET = os.getenv("GOOGLE_OAUTH_CLIENT_SECRET") or os.getenv("VITE_GOOGLE_OAUTH_CLIENT_SECRET")
+GOOGLE_OAUTH_CALLBACK_URL = os.getenv("GOOGLE_OAUTH_CALLBACK_URL") or os.getenv(
+    "VITE_GOOGLE_OAUTH_CALLBACK_URL",
+    "http://localhost:5173/google/callback/",
+)
 
 from pathlib import Path
 
@@ -25,12 +33,14 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)!ws*7$n!0^!mf=al1g^lnxe8=95bdlu^18lj^%@cy+d$$n4b$'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'testserver'])
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Application definition
@@ -44,14 +54,45 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'corsheaders',
+    'channels',
     'accounts',
     'api',
     'tours',
     'bookings',
     'payments',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'dj_rest_auth.registration',
+    
     
 ]
+
+# django-allauth (social)
+# Authenticate if local account with this email address already exists
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+# Connect local account and social account if local account with that email address already exists
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APPS": [
+            {
+                "client_id": GOOGLE_OAUTH_CLIENT_ID,
+                "secret": GOOGLE_OAUTH_CLIENT_SECRET,
+                "key": "",
+            },
+        ],
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
+}
+# django.contrb.sites
+SITE_ID = 1
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', #For frontend-backend communication
@@ -60,17 +101,23 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# django-cors-headers
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_CREDENTIALS = True
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Disable email verification for simplicity
+
 AUTH_USER_MODEL = 'accounts.Customer'
 # custom user model - set this BEFORE first migration
 #Using it for global authentication and authorization
-
-# Stripe (Sidni Adventures sandbox account)
-STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
-STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
 
 # Safaricom Daraja (sandbox)
 MPESA_CONSUMER_KEY = env("MPESA_CONSUMER_KEY")
@@ -78,7 +125,9 @@ MPESA_CONSUMER_SECRET = env("MPESA_CONSUMER_SECRET")
 MPESA_SHORTCODE = env("MPESA_SHORTCODE")
 MPESA_PASSKEY = env("MPESA_PASSKEY")
 MPESA_CALLBACK_URL = env("MPESA_CALLBACK_URL")
-MPESA_ENV = env("MPESA_ENV")
+MPESA_ENVIRONMENT = env("MPESA_ENVIRONMENT")
+PHONE_NUMBER = env("PHONE_NUMBER")
+
 
 
 
@@ -117,11 +166,11 @@ DATABASES = { #I am using PostgreSQL for this project, but you can use any datab
         'PORT': env('DB_PORT'),
  }
 }
-CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000", # React dev server (CRA)
-        "http://localhost:5173", # React dev server (Vite)
-        "https://sidni-adventures-tours-and-travel.vercel.app", # React production build (Vercel)   
-]
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://sidni-adventures-tours-and-travel.vercel.app",
+])
 REST_FRAMEWORK = {
  'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -129,6 +178,11 @@ REST_FRAMEWORK = {
  'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
  ),
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'SESSION_LOGIN': False,
 }
 
 

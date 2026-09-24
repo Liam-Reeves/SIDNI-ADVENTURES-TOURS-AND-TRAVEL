@@ -40,7 +40,7 @@ function TourListingCard({ tour }) {
         <div className="tour-card__footer">
           <div>
             <p className="tour-card__price-label">From</p>
-            <p className="tour-card__price">${tour.price}</p>
+            <p className="tour-card__price">KES {tour.price}</p>
           </div>
 
           <Button

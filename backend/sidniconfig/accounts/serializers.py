@@ -1,7 +1,28 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 Customer = get_user_model()
+
+
+class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        identifier = attrs.get("username", "").strip()
+        password = attrs.get("password", "")
+        user = Customer.objects.filter(email__iexact=identifier).first()
+
+        if user is None:
+            user = Customer.objects.filter(username__iexact=identifier).first()
+
+        if user is None or not user.check_password(password) or not user.is_active:
+            raise serializers.ValidationError("No active account matches these credentials.")
+
+        refresh = RefreshToken.for_user(user)
+        return {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+        }
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +32,7 @@ class CustomerSerializer(serializers.ModelSerializer):
                  'first_name',
                  'last_name',
                  'phone_number',
-                  'is_ existing_customer',
+                  'is_existing_customer',
                   'created_at',
    
                  ]
